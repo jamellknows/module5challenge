@@ -98,27 +98,37 @@ function getPasswordOptions() {
       div.innerHTML = 
       `<form id="form" onsubmit ="return false">
       <input type="number" id="length" name="length" min="10" max="64" required>
-      <label for="length">password length between(10-64 characters)</label><br>
+      <label for="length">password length</label><br>
       <input type="checkbox" id="upperCase" name="upperCase" value="upperCase">
-      <label for="upperCase">uppercase?</label><br>
+      <label for="upperCase">uppercase charaters</label><br>
       <input type="checkbox" id="lowerCase" name="lowerCase" value="lowerCase">
-      <label for="lowerCase">lowercase?</label><br>
+      <label for="lowerCase">lowercase characters</label><br>
       <input type="checkbox" id="special" name="special" value="special">
-      <label for="special">special characters?</label><br>
+      <label for="special">special characters</label><br>
       <button id="submit" onclick="writePassword(event)">Submit</button> 
     </form>`
     let submit = document.getElementById('submit')
     submit.addEventListener('click', function(e){
       let form = document.getElementById('form')
       let length = document.getElementById('length').value
-      let upper = document.getElementById('upperCase').checked
-      let lower = document.getElementById('lowerCase').checked
-      let special = document.getElementById('special').checked
-      upper = (upper == true) ? true : false
-      lower = (lower == true) ? true : false
-      special = (special == true) ? true : false
-      
-      generatePassword(length, upper, lower, special)
+      if(length > 64 || length < 10)
+      {
+        return 
+      }
+      else 
+      {
+        let upper = document.getElementById('upperCase').checked
+        let lower = document.getElementById('lowerCase').checked
+        let special = document.getElementById('special').checked
+        upper = (upper == true) ? true : false
+        lower = (lower == true) ? true : false
+        special = (special == true) ? true : false
+        div.innerHTML = ""
+        generatePassword(length, upper, lower, special)
+        
+
+      }
+
 
       
     
@@ -188,7 +198,7 @@ function generatePassword(length, upper, lower,special) {
   }
   else if (special)
   {
-    let available = [...specialCasedCharacters,...numericCharacters]
+    let available = [...specialCharacters,...numericCharacters]
     for(let i = 0; i < length - 1; i++)
     {
       pass += getRandom(available)
