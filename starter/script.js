@@ -111,13 +111,13 @@ function getPasswordOptions() {
     submit.addEventListener('click', function(e){
       let form = document.getElementById('form')
       let length = document.getElementById('length').value
-      let upper = document.getElementById('upper').value
-      let lower = document.getElementById('lower').value
-      let special = document.getElementById('special').value
-      upper = upper ? true : false
-      lower = lower ? true : false
-      special = special ? true : false
-      console.log(length)
+      let upper = document.getElementById('upperCase').checked
+      let lower = document.getElementById('lowerCase').checked
+      let special = document.getElementById('special').checked
+      upper = (upper == true) ? true : false
+      lower = (lower == true) ? true : false
+      special = (special == true) ? true : false
+      
       generatePassword(length, upper, lower, special)
 
       
@@ -133,16 +133,9 @@ function getPasswordOptions() {
 }
 
 
-function getData(form)
-{
-  console.log('hello')
-  let formData = new FormData(form)
-  console.log(Object.fromEntries(formData))
-}
-
 // Function for getting a random element from an array
 function getRandom(arr) {
-  let rand = Math.floor(Math.random()*arr.length) - 1
+  let rand = Math.floor(Math.random()*(arr.length - 1) )
   return arr[rand]
 
 }
@@ -150,12 +143,11 @@ function getRandom(arr) {
 // Function to generate password with user input
 function generatePassword(length, upper, lower,special) {
 
-  let pass = ""
+  let pass = new String()
   if(upper && special && lower)
   {
     let available = [...lowerCasedCharacters,...numericCharacters, ...upperCasedCharacters, ...specialCharacters]
-    console.log(available)
-    for(let i = 0; i < length; i++)
+    for(let i = 0; i < length - 1; i++)
     {
       pass += getRandom(available)
     }
@@ -164,7 +156,7 @@ function generatePassword(length, upper, lower,special) {
   else if(upper && lower)
   {
     let available = [...lowerCasedCharacters,...numericCharacters, ...upperCasedCharacters]
-    for(let i = 0; i < length; i++)
+    for(let i = 0; i < length - 1; i++)
     {
       pass += getRandom(available)
     }  
@@ -172,7 +164,7 @@ function generatePassword(length, upper, lower,special) {
   else if(special && lower)
   {
     let available = [...lowerCasedCharacters,...numericCharacters,...specialCharacters]
-    for(let i = 0; i < length; i++)
+    for(let i = 0; i < length - 1; i++)
     {
       pass += getRandom(available)
     }  
@@ -180,10 +172,27 @@ function generatePassword(length, upper, lower,special) {
   else if(lower)
   {
     let available = [...lowerCasedCharacters,...numericCharacters]
-    for(let i = 0; i < length; i++)
+    for(let i = 0; i < length - 1; i++)
     {
       pass += getRandom(available)
     }  
+  }
+  else if (upper)
+  {
+    let available = [...upperCasedCharacters,...numericCharacters]
+    for(let i = 0; i < length - 1; i++)
+    {
+      pass += getRandom(available)
+    } 
+
+  }
+  else if (special)
+  {
+    let available = [...specialCasedCharacters,...numericCharacters]
+    for(let i = 0; i < length - 1; i++)
+    {
+      pass += getRandom(available)
+    } 
   }
   else
   {
@@ -194,6 +203,7 @@ function generatePassword(length, upper, lower,special) {
     } 
 
   }
+  writePassword(pass)
       
 }
 
@@ -201,10 +211,10 @@ function generatePassword(length, upper, lower,special) {
 var generateBtn = document.querySelector('#generate');
 
 // Write password to the #password input
-function writePassword() {
+function writePassword(pass) {
   
 
-  var password = generatePassword();
+  let password = pass
   var passwordText = document.querySelector('#password');
 
   passwordText.value = password;
