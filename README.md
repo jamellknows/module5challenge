@@ -19,29 +19,13 @@ The following image shows the web application's appearance and functionality:
 
 This challenge is graded based on the following criteria: 
 
-### Technical Acceptance Criteria: 40%
 
-* Satisfies all of the above acceptance criteria plus the following:
-
-  * The challenge should not produce any errors in the console when you inspect it using Chrome DevTools.
 
 ### Deployed At:
 
-* Application deployed at live URL.
 
-* Application loads with no errors.
 
-* Application GitHub URL submitted.
 
-* GitHub repository that contains application code.
-
-### Application Quality: 15%
-
-* Application user experience is intuitive and easy to navigate.
-
-* Application user interface style is clean and polished.
-
-* Application resembles the mock-up functionality provided in the challenge instructions.
 ## License
 
 MIT License

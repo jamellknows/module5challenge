@@ -123,7 +123,6 @@ function getPasswordOptions() {
         upper = (upper == true) ? true : false
         lower = (lower == true) ? true : false
         special = (special == true) ? true : false
-        div.innerHTML = ""
         generatePassword(length, upper, lower, special)
         
 
